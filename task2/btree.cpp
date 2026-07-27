@@ -99,8 +99,17 @@ bool isBalanced(node* tree){
 // sono completamente pieni e l'ultimo livello è riempito da sinistra a destra.
 
 //si deve controllare la posizione dei nodi mancanti.
-bool isComplete(node* tree){
-    
+
+int countNodes(node* tree){
+    if(tree == nullptr) return 0;
+    return 1 + countNodes(tree->left) + countNodes(tree->right);
+}
+
+bool isComplete(node* tree, int index, int num){
+    if(tree == nullptr) return true;
+    if(index > num){
+        
+    }
 }
 
 int main(){

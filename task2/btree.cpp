@@ -37,8 +37,7 @@ int max(int leftHeight, int rightHeight) {
 
 int treeHeight(node* tree) {
     if(tree == nullptr) return 0;
-    // l'altezza del nodo è 1 (l'arco verso il figlio) + l'altezza 
-    // del sottoalbero più profondo tra sinistro e destro
+    // l'altezza del nodo è 1 (l'arco verso il figlio), più l'altezza del sottoalbero più profondo tra sinistro e destro
     return 1 + max(treeHeight(tree->left), treeHeight(tree->right));
 }
 
@@ -58,6 +57,10 @@ void treeDepth(node* tree, int currentDepth) {
 }
 
 //!terzo punto 
+
+bool isBalanced(node* tree){
+    
+}
 
 int main(){
     return 0;

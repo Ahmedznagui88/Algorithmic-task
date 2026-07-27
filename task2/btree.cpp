@@ -94,6 +94,15 @@ bool isBalanced(node* tree){
     return checkBalanced(tree) != -1;
 }
 
+//* quarto punto
+//completo è un albero in cui tutti i livelli eventualmente tranne l’ultimo
+// sono completamente pieni e l'ultimo livello è riempito da sinistra a destra.
+
+//si deve controllare la posizione dei nodi mancanti.
+bool isComplete(node* tree){
+    
+}
+
 int main(){
     return 0;
 }

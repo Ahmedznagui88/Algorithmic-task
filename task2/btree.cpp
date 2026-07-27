@@ -56,10 +56,42 @@ void treeDepth(node* tree, int currentDepth) {
     }    
 }
 
-//!terzo punto 
+
+//!terzo punto O(n) 
+// per definizione se un albero è bilanciato => |hd - hs| ≤ 1, vale per tutti i sottoalberi
+// cercare di farlo in O(n)
+
+//trovare il valore assoluto
+int absoluteValue(int number){
+    return (number < 0) ? -number : number;
+}
+
+//calcolo l'altezza e il bilanciamento
+int checkBalanced(node* tree){
+    // se l'albero è vuoto...
+    if(tree == nullptr){
+        return 0;
+    }
+
+    // l'altezza dei due sottoalberi destro e sinistro     
+    int leftHeight = checkBalanced(tree->left);
+    int rightHeight = checkBalanced(tree->right);
+
+    // controllo lo sbilanciamento dei due sotto alberi immediatamente
+    // se uno dei due alberi e sbilanciato non vado avanti
+    if((leftHeight == -1) || (rightHeight == -1)){
+        return -1;
+    }
+    //|hd - hs| ≤ 1
+    if(absoluteValue(leftHeight - rightHeight) <= 1){
+        return 1 + max(leftHeight, rightHeight);
+    }else{
+        return -1;
+    }
+}
 
 bool isBalanced(node* tree){
-    
+    return checkBalanced(tree) != -1;
 }
 
 int main(){

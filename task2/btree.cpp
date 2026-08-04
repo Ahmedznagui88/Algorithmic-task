@@ -97,18 +97,31 @@ bool isBalanced(node* tree){
 //* quarto punto
 //completo è un albero in cui tutti i livelli eventualmente tranne l’ultimo
 // sono completamente pieni e l'ultimo livello è riempito da sinistra a destra.
-
 //si deve controllare la posizione dei nodi mancanti.
 
+// conta quanti nodi ha l'albero in totale (serve come "num" per isComplete)
 int countNodes(node* tree){
     if(tree == nullptr) return 0;
     return 1 + countNodes(tree->left) + countNodes(tree->right);
 }
 
+// usa la numerazione stile heap: radice = 1, figlio sx = 2*index, figlio dx = 2*index+1.
+// se l'albero è completo, tutti i nodi hanno un indice compreso tra 1 e num (nessun "buco").
+// se un nodo esistente ha index > num, significa che c'è uno spazio vuoto prima di lui
+// nella numerazione ideale -> l'albero non è completo.
+
+// index -> indice nodi
+// num -> num totale dei nodi nell'albero
 bool isComplete(node* tree, int index, int num){
+    // nessun nodo presente
     if(tree == nullptr) return true;
+
+    //il nodo esiste ma l'indice supera il totale dei nodi, quindi ce un buco -> non è completo
     if(index > num){
-        
+        return false;
+    }else{
+        //entrambi i sottoalberi devonon essere completati
+        return isComplete(tree->left, 2*index, num) && isComplete(tree->right, 2*index + 1, num);
     }
 }
 

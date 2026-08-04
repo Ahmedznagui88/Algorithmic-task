@@ -125,6 +125,11 @@ bool isComplete(node* tree, int index, int num){
     }
 }
 
+//! quinto punto
+int lowCommonAncestor(node* tree, int a, int b){
+    
+}
+
 int main(){
     return 0;
 }

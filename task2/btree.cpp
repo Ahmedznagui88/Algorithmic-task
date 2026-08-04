@@ -69,9 +69,7 @@ int absoluteValue(int number){
 //calcolo l'altezza e il bilanciamento
 int checkBalanced(node* tree){
     // se l'albero è vuoto...
-    if(tree == nullptr){
-        return 0;
-    }
+    if(tree == nullptr) return 0;
 
     // l'altezza dei due sottoalberi destro e sinistro     
     int leftHeight = checkBalanced(tree->left);
@@ -126,9 +124,43 @@ bool isComplete(node* tree, int index, int num){
 }
 
 //! quinto punto
+// Lowest Common Ancestor: trova il nodo più basso che ha sia 'a' che 'b' nel suo sottoalbero.
+// Logica: se 'a' e 'b' si trovano uno nel sottoalbero sinistro e uno nel destro
+// rispetto a un nodo, quel nodo è l'LCA. Si usa 0 come valore "non trovato"
+// (assunzione: nessun nodo dell'albero ha valore 0).
 int lowCommonAncestor(node* tree, int a, int b){
-    
+    // sottoalbero vuoto: nessuno dei due valori può stare qui
+    if(tree == nullptr) return 0;
+
+    // il nodo corrente è uno dei due valori cercati: si "segnala" verso l'alto
+    if((tree->data == a) || (tree->data == b)){
+        return tree->data;
+    }
+
+    // cerca a e b nei due sottoalberi
+    int leftResult = lowCommonAncestor(tree->left, a, b);
+    int rightResult = lowCommonAncestor(tree->right, a, b);
+
+    // trovato un valore a sinistra E uno a destra -> il nodo corrente
+    // è l'antenato comune più basso possibile
+    if(leftResult != 0 && rightResult != 0){
+        return tree->data;
+    }
+
+    // trovato solo a sinistra -> l'LCA (se esiste) è più in basso, a sinistra
+    if(leftResult != 0){
+        return leftResult;
+    }
+
+    // trovato solo a destra -> l'LCA (se esiste) è più in basso, a destra
+    if(rightResult != 0){
+        return rightResult;
+    }
+
+    // nessuno dei due valori trovato in questo sottoalbero
+    return 0;
 }
+
 
 int main(){
     return 0;
